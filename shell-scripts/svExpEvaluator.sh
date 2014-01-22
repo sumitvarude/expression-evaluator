@@ -1,0 +1,1 @@
+java -cp $EVALUATOR_HOME/lib/evaluator-0.1.jar sumitvar.evaluator.main.Evaluator "${@}"

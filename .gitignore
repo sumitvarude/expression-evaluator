@@ -1,0 +1,9 @@
+*.class
+.idea
+.iml
+*.jar
+.zip
+build/
+out/
+*.ser
+*.war

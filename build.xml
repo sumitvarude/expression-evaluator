@@ -1,0 +1,51 @@
+<project name="expression-evaluator" default="dist">
+    <target name="clean">
+        <delete dir="expression-evaluator"></delete>
+        <delete dir="build"></delete>
+    </target>
+
+    <target name="create-dir" depends="clean">
+        <mkdir dir="build"></mkdir>
+        <mkdir dir="build/src"></mkdir>
+        <mkdir dir="build/test"></mkdir>
+        <mkdir dir="expression-evaluator"></mkdir>
+        <mkdir dir="expression-evaluator/bin"></mkdir>
+        <mkdir dir="expression-evaluator/lib"></mkdir>
+    </target>
+
+    <target name="compile-src" depends="create-dir">
+        <javac srcdir="src" destdir="build/src" includeantruntime="false"></javac>
+    </target>
+
+    <target name="compile-test" depends="compile-src">
+        <javac srcdir="test" destdir="build/test" includeantruntime="false"
+               classpath="external-libraries/junit-4.10.jar"></javac>
+    </target>
+
+    <target name="run-test" depends="compile-test">
+        <java classname="org.junit.runner.JUnitCore"
+                classpath="external-libraries/junit-4.10.jar;build/src;build/test">
+        <arg value="sumitvar.lib.operationsTest"></arg>
+        </java>
+    </target>
+
+    <target name="create-jar" depends="run-test">
+        <jar destfile="expression-evaluator/lib/expression-evaluator.jar" basedir="build/src"></jar>
+    </target>
+
+    <target name="copy-shell-files" depends="create-jar">
+        <copy file="shell-scripts/svExpEvaluator.sh" todir="expression-evaluator/bin"></copy>
+    </target>
+
+    <target name="copy-readme" depends="copy-shell-files">
+       <copy file="README.md" todir="expression-evaluator"></copy>
+    </target>
+
+    <target name="delete-build" depends="copy-readme">
+        <delete dir="build"></delete>
+    </target>
+
+    <target name="dist" depends="delete-build">
+        <zip zipfile="expression-evaluator.0.1.zip" basedir="expression-evaluator"></zip>
+    </target>
+</project>
