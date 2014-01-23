@@ -1,0 +1,1 @@
+java -cp ${EVALUATOR_HOME}/lib/expression-evaluator.jar sumitvar.evaluator.main.Evaluator $@
