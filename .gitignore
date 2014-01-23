@@ -1,7 +1,6 @@
 *.class
 .idea
 .iml
-*.jar
 .zip
 build/
 out/
