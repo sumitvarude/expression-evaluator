@@ -1,6 +1,5 @@
 <project name="expression-evaluator" default="dist">
     <target name="clean">
-        <delete dir="expression-evaluator"></delete>
         <delete dir="build"></delete>
         <delete file="expression-evaluator-v0.3.zip"></delete>
     </target>
@@ -9,10 +8,8 @@
         <mkdir dir="build"></mkdir>
         <mkdir dir="build/src"></mkdir>
         <mkdir dir="build/test"></mkdir>
-        <mkdir dir="build/dist"></mkdir>
-        <mkdir dir="expression-evaluator"></mkdir>
-        <mkdir dir="expression-evaluator/bin"></mkdir>
-        <mkdir dir="expression-evaluator/lib"></mkdir>
+        <mkdir dir="build/dist/bin"></mkdir>
+        <mkdir dir="build/dist/lib"></mkdir>
     </target>
 
     <target name="compile-src" depends="create-dir">
@@ -40,22 +37,19 @@
         </junit>
     </target>
     <target name="create-jar" depends="runtest">
-        <jar destfile="expression-evaluator/lib/expression-evaluator.jar" basedir="build/src"></jar>
+        <jar destfile="build/dist/lib/expression-evaluator.jar" basedir="build/src"></jar>
     </target>
 
     <target name="copy-shell-files" depends="create-jar">
-        <copy file="shell-scripts/evaluator.sh" todir="expression-evaluator/bin"></copy>
+        <copy file="shell-scripts/evaluator.sh" todir="build/dist/bin"></copy>
     </target>
 
     <target name="copy-readme" depends="copy-shell-files">
-       <copy file="README.md" todir="expression-evaluator"></copy>
+       <copy file="README.md" todir="build/dist"></copy>
     </target>
 
-    <target name="delete-build" depends="copy-readme">
-        <delete dir="build"></delete>
-    </target>
 
-    <target name="dist" depends="delete-build">
-        <zip zipfile="expression-evaluator-v0.3.zip" basedir = "expression-evaluator"></zip>
+    <target name="dist" depends="copy-readme">
+        <zip zipfile="build/expression-evaluator-v0.4.zip" basedir = "build/dist"></zip>
     </target>
 </project>

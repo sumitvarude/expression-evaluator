@@ -11,6 +11,14 @@
 1) Give `sh evaluator.sh [Expression]`    
 2) Example `sh evaluator.sh 2 + 3`
 
+##Release notes for Version 0.4
+1) Decimal operands supported.
+1) Space will not be allowed between sign & value of negative operand.
+2) Expression must have space between operator & operands.
+3) Brackets are not allowed.
+
+Ex. `5.0 + 5 * 2.0 - 10 / 2 ^ 2 ` = 25
+
 ##Release notes for Version 0.3
 1) Multiple operands & multiple operators supported.     
 2) Supported opeartors are `+ - * / ^`.    
