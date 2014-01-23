@@ -1,8 +1,11 @@
 package sumitvar.evaluator.main;
 
-import sumitvar.evaluator.lib.Operations;
+import sumitvar.evaluator.lib.EvaluatorOperations;
 
 public class Evaluator {
-    Operations operation = new Operations();
-
+    public static void main(String[] args) {
+        EvaluatorOperations operation = new EvaluatorOperations();
+        float result =  operation.executeEvaluator(args);
+        System.out.println(result);
+    }
 }
