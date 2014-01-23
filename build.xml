@@ -2,6 +2,7 @@
     <target name="clean">
         <delete dir="expression-evaluator"></delete>
         <delete dir="build"></delete>
+        <delete file="expression-evaluator-v0.1.zip"></delete>
     </target>
 
     <target name="create-dir" depends="clean">
