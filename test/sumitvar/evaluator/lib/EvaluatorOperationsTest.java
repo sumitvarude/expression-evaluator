@@ -28,7 +28,6 @@ public class EvaluatorOperationsTest {
         EvaluatorOperations op = new EvaluatorOperations();
 
         List<String> operators = op.getOperators(arg);
-
         assertEquals(expected, operators);
     }
 
@@ -47,6 +46,16 @@ public class EvaluatorOperationsTest {
         String[] arg = {"2", "+", "3"};
         float expected = 5.0f;
         EvaluatorOperations op = new EvaluatorOperations();
+
+        float result = op.executeEvaluator(arg);
+        assertEquals(expected,result , 0.0);
+    }
+
+    @Test
+    public void executeEvaluatorWillGiveAdditionOfMultipleNumbers() throws Exception {
+        String[] arg = {"2", "+", "3", "+", "5"};
+        float expected = 10.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
 
         float result = op.executeEvaluator(arg);
         assertEquals(expected,result , 0.0);
