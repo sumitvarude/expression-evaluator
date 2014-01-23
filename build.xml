@@ -44,7 +44,7 @@
     </target>
 
     <target name="copy-shell-files" depends="create-jar">
-        <copy file="shell-scripts/svExpEvaluator.sh" todir="expression-evaluator/bin"></copy>
+        <copy file="shell-scripts/evaluator.sh" todir="expression-evaluator/bin"></copy>
     </target>
 
     <target name="copy-readme" depends="copy-shell-files">
