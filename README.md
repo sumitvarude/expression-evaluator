@@ -11,18 +11,27 @@
 1) Give `sh evaluator.sh [Expression]`    
 2) Example `sh evaluator.sh 2 + 3`
 
+##Release notes for Version 0.3
+1) Multiple operands & multiple operators supported.     
+2) Supported opeartors are `+ - * / ^`.    
+2) Space will not be allowed between sign & value of negative operand.    
+3) Expression must have space between operator & operands.       
+4) Brackets are not allowed.     
+
+Ex. `5 + 5 * 2 - 10 / 2 ^ 2 ` = 25
+
 ##Release notes for Version 0.2
-1) Only two multiple operands & addition operator supported.
-2) Space will not be allowed between sign & value of negative operand.
-3) Expression must have space between operator & operands.
-4) Brackets are not allowed.
+1) Only multiple operands & addition operator supported.    
+2) Space will not be allowed between sign & value of negative operand.    
+3) Expression must have space between operator & operands.    
+4) Brackets are not allowed.     
 
 Ex. `5 + 5 + 2 + 1` = 13
 
 ##Release notes for Version 0.1
 1) Supports only positive & negative integers.    
-2) Only two operands & addition operator supported.   
-3) Expression must have space between operator & operands.
-4) Brackets are not allowed.
+2) Only two operands & addition operator supported.    
+3) Expression must have space between operator & operands.    
+4) Brackets are not allowed.     
 
 Ex. `5 + 5` = 10
