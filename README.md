@@ -13,8 +13,9 @@
 
 ##Release notes for Version 0.2
 1) Only two multiple operands & addition operator supported.
-2) Expression must have space between operator & operands.
-3) Brackets are not allowed.
+2) Space will not be allowed between sign & value of negative operand.
+3) Expression must have space between operator & operands.
+4) Brackets are not allowed.
 
 Ex. `5 + 5 + 2 + 1` = 13
 
