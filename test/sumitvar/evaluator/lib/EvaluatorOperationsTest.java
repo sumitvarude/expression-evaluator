@@ -62,12 +62,32 @@ public class EvaluatorOperationsTest {
     }
 
     @Test
-    public void subtractOperandsWillAddTwoNumbers() throws Exception {
+    public void subtractOperandsWillSubtractTwoNumbers() throws Exception {
         float one = 2.0f, two = 1.0f;
         float expected = 1.0f;
         EvaluatorOperations op = new EvaluatorOperations();
 
         float result = op.subtractOperands(one, two);
+        assertEquals(result, expected , 0.0);
+    }
+
+    @Test
+    public void multiplyOperandsWillMultiplyTwoNumbers() throws Exception {
+        float one = 2.0f, two = 3.0f;
+        float expected = 6.0f;
+        EvaluatorOperations op = new EvaluatorOperations();
+
+        float result = op.mutiplyOperands(one, two);
+        assertEquals(result, expected , 0.0);
+    }
+
+    @Test
+    public void divideOperandsWillDivideTwoNumbers() throws Exception {
+        float one = 6.0f, two = 3.0f;
+        float expected = 2.0f;
+        EvaluatorOperations op = new EvaluatorOperations();
+
+        float result = op.divideOperands(one, two);
         assertEquals(result, expected , 0.0);
     }
 }

@@ -44,5 +44,12 @@ public class EvaluatorOperations {
         return temp;
     }
 
+    public float mutiplyOperands(float a, float b) {
+        return a*b;
+    }
+
+    public float divideOperands(float a, float b) {
+        return a/b;
+    }
 }
 
