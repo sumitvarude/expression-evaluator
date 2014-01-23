@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EvaluatorOperations {
+    public boolean hasFloat(String[] arg){
+        for (int i = 0; i < arg.length; i++) {
+            if(arg[i].contains("."))
+                return true;
+        }
+        return false;
+    }
     public List<Float> getOperands(String[] arg) {
         List<Float> operands = new ArrayList();
         for (int i = 0; i < arg.length; i++) {
