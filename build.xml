@@ -9,6 +9,7 @@
         <mkdir dir="build"></mkdir>
         <mkdir dir="build/src"></mkdir>
         <mkdir dir="build/test"></mkdir>
+        <mkdir dir="build/dist"></mkdir>
         <mkdir dir="expression-evaluator"></mkdir>
         <mkdir dir="expression-evaluator/bin"></mkdir>
         <mkdir dir="expression-evaluator/lib"></mkdir>
