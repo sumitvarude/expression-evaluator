@@ -77,7 +77,7 @@ public class EvaluatorOperationsTest {
         float expected = 6.0f;
         EvaluatorOperations op = new EvaluatorOperations();
 
-        float result = op.mutiplyOperands(one, two);
+        float result = op.multiplyOperands(one, two);
         assertEquals(result, expected , 0.0);
     }
 
@@ -89,5 +89,25 @@ public class EvaluatorOperationsTest {
 
         float result = op.divideOperands(one, two);
         assertEquals(result, expected , 0.0);
+    }
+
+    @Test
+    public void getPowerWillGivePowerOfOperand() throws Exception {
+        float operand = 3.0f, power = 3.0f;
+        float expected = 27.0f;
+        EvaluatorOperations op = new EvaluatorOperations();
+
+        float result = op.getPower(operand, power);
+        assertEquals(result, expected , 0.0);
+    }
+
+    @Test
+    public void executeEvaluatorWillEvaluateExpressionNotHavingBracket() throws Exception {
+        String[] arg = {"3", "-", "1", "*", "5","/","2","^","2"};
+        float expected = 25.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+
+        float result = op.executeEvaluator(arg);
+        assertEquals(expected,result , 0.0);
     }
 }
