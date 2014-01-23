@@ -6,6 +6,6 @@ public class Evaluator {
     public static void main(String[] args) {
         EvaluatorOperations operation = new EvaluatorOperations();
         float result =  operation.executeEvaluator(args);
-        System.out.println(result);
+        System.out.println((int)result);
     }
 }

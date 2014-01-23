@@ -7,8 +7,11 @@ public class EvaluatorOperations {
    public List<Float> getOperands(String[]arg){
        List<Float> operands = new ArrayList();
        for (int i = 0; i < arg.length ; i++) {
-            if(arg[i].matches("[0-9]+"))
-                operands.add(Float.parseFloat(arg[i]));
+           try{
+               operands.add(Float.parseFloat(arg[i]));
+           }
+           catch(Exception e){
+           }
        }
        return operands;
    }
