@@ -19,17 +19,25 @@
 
     <target name="compile-test" depends="compile-src">
         <javac srcdir="test" destdir="build/test" includeantruntime="false"
-               classpath="external-libraries/junit-4.10.jar"></javac>
+               classpath="external-libraries/junit-4.10.jar;build/src"></javac>
     </target>
 
-    <target name="run-test" depends="compile-test">
-        <java classname="org.junit.runner.JUnitCore"
-                classpath="external-libraries/junit-4.10.jar;build/src;build/test">
-        <arg value="sumitvar.lib.operationsTest"></arg>
-        </java>
+    <target name="runtest" depends="compile-test">
+        <junit fork="yes" printsummary="on"  haltonfailure="yes" failureProperty="test.failed" dir="." >
+            <classpath>
+                <pathelement location="build/src" />
+                <pathelement location="build/test" />
+                <pathelement location="external-libraries/junit-4.10.jar"/>
+            </classpath>
+            <batchtest >
+                <fileset dir="test">
+                    <include name="**/*Test.java" />
+                    <exclude name="**/*$*.class"/>
+                </fileset>
+            </batchtest>
+        </junit>
     </target>
-
-    <target name="create-jar" depends="run-test">
+    <target name="create-jar" depends="runtest">
         <jar destfile="expression-evaluator/lib/expression-evaluator.jar" basedir="build/src"></jar>
     </target>
 
