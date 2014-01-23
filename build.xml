@@ -56,6 +56,6 @@
     </target>
 
     <target name="dist" depends="delete-build">
-        <zip zipfile="expression-evaluator-v0.1.zip" basedir="expression-evaluator"></zip>
+        <zip zipfile="expression-evaluator-v0.2.zip" basedir="expression-evaluator"></zip>
     </target>
 </project>
