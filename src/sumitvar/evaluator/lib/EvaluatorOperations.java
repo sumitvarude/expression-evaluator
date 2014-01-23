@@ -33,7 +33,11 @@ public class EvaluatorOperations {
     public float executeEvaluator(String[]arg){
         List<Float> operands = getOperands(arg);
         List<String> operator = getOperators(arg);
-        return addOperands(operands.get(0),operands.get(1));
+        float temp = 0.0f;
+        for (int i = 0; i <= operator.size() ; i++) {
+            temp = addOperands(temp,operands.get(i));
+        }
+        return temp;
     }
 }
 

@@ -11,6 +11,12 @@
 1) Give `sh evaluator.sh [Expression]`    
 2) Example `sh evaluator.sh 2 + 3`
 
+##Release notes for Version 0.2
+1) Only two multiple operands & addition operator supported.
+2) Expression must have space between operator & operands.
+3) Brackets are not allowed.
+
+Ex. `5 + 5 + 2 + 1` = 13
 
 ##Release notes for Version 0.1
 1) Supports only positive & negative integers.    
