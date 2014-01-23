@@ -2,7 +2,7 @@
     <target name="clean">
         <delete dir="expression-evaluator"></delete>
         <delete dir="build"></delete>
-        <delete file="expression-evaluator-v0.1.zip"></delete>
+        <delete file="expression-evaluator-v0.3.zip"></delete>
     </target>
 
     <target name="create-dir" depends="clean">
@@ -56,6 +56,6 @@
     </target>
 
     <target name="dist" depends="delete-build">
-        <zip zipfile="expression-evaluator-v0.3.zip" basedir="expression-evaluator"></zip>
+        <zip zipfile="expression-evaluator-v0.3.zip" basedir = "expression-evaluator"></zip>
     </target>
 </project>
