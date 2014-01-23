@@ -30,6 +30,10 @@ public class EvaluatorOperations {
     public float addOperands(float a,float b){
         return a+b;
     }
+
+    public float subtractOperands(float a, float b) {
+        return a-b;
+    }
     public float executeEvaluator(String[]arg){
         List<Float> operands = getOperands(arg);
         List<String> operator = getOperators(arg);
@@ -39,5 +43,6 @@ public class EvaluatorOperations {
         }
         return temp;
     }
+
 }
 

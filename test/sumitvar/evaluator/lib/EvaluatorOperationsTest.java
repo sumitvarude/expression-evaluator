@@ -60,4 +60,14 @@ public class EvaluatorOperationsTest {
         float result = op.executeEvaluator(arg);
         assertEquals(expected,result , 0.0);
     }
+
+    @Test
+    public void subtractOperandsWillAddTwoNumbers() throws Exception {
+        float one = 2.0f, two = 1.0f;
+        float expected = 1.0f;
+        EvaluatorOperations op = new EvaluatorOperations();
+
+        float result = op.subtractOperands(one, two);
+        assertEquals(result, expected , 0.0);
+    }
 }
