@@ -50,6 +50,6 @@
 
 
     <target name="dist" depends="copy-readme">
-        <zip zipfile="build/expression-evaluator-v0.4.zip" basedir = "build/dist"></zip>
+        <zip zipfile="build/expression-evaluator-v0.5.zip" basedir = "build/dist"></zip>
     </target>
 </project>
