@@ -2,14 +2,20 @@
 
 ###Steps to install
 1) Extract the zip folder(can have different names depending on version).
-2) Create environment veriable `EVALUATOR_HOME`    
-3) Set path of your folder in this veriable.    
+2) Create environment variable `EVALUATOR_HOME`
+3) Set path of your folder in this variable.
 4) Use shell file to run expression-evaluator.    
 
 
 ###Steps to use
 1) Give `sh evaluator.sh [Expression]`    
 2) Example `sh evaluator.sh 2 + 3`
+
+##Release notes for Version 0.8
+1) Nested round bracket are allowed.
+2) Expression must have space between operator & operands.
+
+Ex. `(2+(3+3)-3)` = 5
 
 ##Release notes for Version 0.7
 1) Nested round bracket are allowed.
