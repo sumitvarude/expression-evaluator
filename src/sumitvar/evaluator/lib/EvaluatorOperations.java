@@ -119,7 +119,7 @@ public class EvaluatorOperations {
             String expressionFromBrackets = getExpressionFromBrackets(wholeExpression);
             float result = executeEvaluator(expressionFromBrackets.trim());
             String modifiedExpression = wholeExpression.replace("("+expressionFromBrackets+")",String.valueOf(result));
-            finalResult = executeEvaluator(modifiedExpression);
+            finalResult = salveExpressionHavingBrackets(modifiedExpression);
             return finalResult;
         }
         else{
