@@ -154,8 +154,8 @@ public class EvaluatorOperationsTest {
 
     @Test
     public void reduceSpacesWillReduceSpacesFromExpression() throws Exception {
-        String arg = "1           0           -            (    5      +      3   )     ";
-        String expected = "10-(5+3)";
+        String arg = "10           -            (    5      +      3   )     ";
+        String expected = "10 - ( 5 + 3 ) ";
         EvaluatorOperations  op = new EvaluatorOperations();
 
         String result = op.reduceSpaces(arg);
@@ -237,5 +237,40 @@ public class EvaluatorOperationsTest {
         EvaluatorOperations  op = new EvaluatorOperations();
         float result = op.evaluateExpression(arg);
         assertEquals(expected,result,0.0);
+    }
+    @Test
+    public void evaluateExpressionWillWorkWithoutSpacesInBetween() throws Exception {
+        String arg = "4--4";
+        float expected = 8.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result,0.0);
+    }
+
+    @Test
+    public void handleSpacesCase1() throws Exception {
+        String arg = "-10.0+((20.0+-5.0))";
+        String expected = "-10.0 + ( ( 20.0 + -5.0 ) )";
+        EvaluatorOperations  op = new EvaluatorOperations();
+        String result = op.handleSpaces(arg);
+        assertEquals(expected,result);
+    }
+
+    @Test
+    public void handleSpacesCase2() throws Exception {
+        String arg = "53 -(63+32)-(-534)";
+        String expected = "53 - ( 63 + 32 ) - ( -534 )";
+        EvaluatorOperations  op = new EvaluatorOperations();
+        String result = op.handleSpaces(arg);
+        assertEquals(expected,result);
+    }
+
+    @Test
+    public void handleSpacesCase3() throws Exception {
+        String arg = "-10.0+ (( 20.0 +-5.0))";
+        String expected = "-10.0 + ( ( 20.0 + -5.0 ) )";
+        EvaluatorOperations  op = new EvaluatorOperations();
+        String result = op.handleSpaces(arg);
+        assertEquals(expected,result);
     }
 }
