@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EvaluatorOperations {
-    public boolean hasFloat(String[] arg){
+    public boolean hasFloat(String[] arg) {
         for (int i = 0; i < arg.length; i++) {
-            if(arg[i].contains("."))
+            if (arg[i].contains("."))
                 return true;
         }
         return false;
     }
+
     public List<Float> getOperands(String[] arg) {
         List<Float> operands = new ArrayList();
         for (int i = 0; i < arg.length; i++) {
@@ -57,26 +58,48 @@ public class EvaluatorOperations {
         }
         return result;
     }
+
     public float executeEvaluator(String[] arg) {
         List<Float> operands = getOperands(arg);
-        List<String > operator = getOperators(arg);
+        List<String> operator = getOperators(arg);
         float temp = operands.get(0);
         int j = 0;
-        for (int i = 0; i < operands.size()-1; i++) {
+        for (int i = 0; i < operands.size() - 1; i++) {
             String s = operator.get(j);
             if (s.equals("+"))
-                temp = addOperands(temp, operands.get(i+1));
-            if(s.equals("-"))
+                temp = addOperands(temp, operands.get(i + 1));
+            if (s.equals("-"))
                 temp = subtractOperands(temp, operands.get(i + 1));
-            if(s.equals("*"))
+            if (s.equals("*"))
                 temp = multiplyOperands(temp, operands.get(i + 1));
-            if(s.equals("/"))
+            if (s.equals("/"))
                 temp = divideOperands(temp, operands.get(i + 1));
-            if(s.equals("^"))
+            if (s.equals("^"))
                 temp = getPower(temp, operands.get(i + 1));
             j++;
         }
         return temp;
+    }
+
+    public String joinExpression(String[] arg) {
+        StringBuilder joinedExpression = new StringBuilder();
+        for (int i = 0; i < arg.length; i++) {
+            joinedExpression.append(arg[i]);
+        }
+        return joinedExpression.toString();
+    }
+
+    public String reduceSpaces(String arg) {
+        String fileData = arg;
+        fileData = fileData.replaceAll("[ ]+", "");
+        return fileData;
+    }
+    public String getExpressionFromBrackets(String arg){
+        String expression  = arg;
+        int startIndex = expression.indexOf("(");
+        int endIndex = expression.indexOf(")");
+        String expressionInBracket = expression.substring(startIndex+1,endIndex);
+        return expressionInBracket;
     }
 }
 

@@ -110,4 +110,33 @@ public class EvaluatorOperationsTest {
         float result = op.executeEvaluator(arg);
         assertEquals(expected,result , 0.0);
     }
+
+    @Test
+    public void joinExpressionWillJoinTheExpression() throws Exception {
+        String[] arg = {"10", "-", "(", "5", "+","3",")"};
+        String expected = "10-(5+3)";
+        EvaluatorOperations  op = new EvaluatorOperations();
+
+        String result = op.joinExpression(arg);
+        assertEquals(expected,result);
+    }
+
+    @Test
+    public void reduceSpacesWillReduceSpacesFromExpression() throws Exception {
+        String arg = "1           0           -            (    5      +      3   )     ";
+        String expected = "10-(5+3)";
+        EvaluatorOperations  op = new EvaluatorOperations();
+
+        String result = op.reduceSpaces(arg);
+        assertEquals(expected,result);
+    }
+
+    @Test
+    public void getExpressionFromBracketsWillGiveExpressionFromBracket() throws Exception {
+        String expression = "10+(5+3)";
+        String expected = "5+3";
+        EvaluatorOperations  op = new EvaluatorOperations();
+        String result = op.getExpressionFromBrackets(expression);
+        assertEquals(expected,result);
+    }
 }
