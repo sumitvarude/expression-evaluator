@@ -163,21 +163,19 @@ public class EvaluatorOperationsTest {
     }
 
     @Test
-    public void getExpressionFromBracketsWillGiveExpressionFromBracket() throws Exception {
-        String expression = "10 + ( 50 + 3 )";
-        String expected = " 50 + 3 ";
-        EvaluatorOperations  op = new EvaluatorOperations();
-        String result = op.getExpressionFromBrackets(expression);
-        assertEquals(expected,result);
-    }
-
-    @Test
     public void swapArrayElementsByOneWillSwapEachElementToPreviousLocation() throws Exception {
         String[] arg = {"", "(", "5", "+", "3", ")"};
         String[] expected = {"(", "5", "+", "3", ")"};
         EvaluatorOperations  op = new EvaluatorOperations();
         String[] result = op.swapArrayElementsByOne(arg);
         Assert.assertArrayEquals(expected,result);
+    }
+
+    @Test
+    public void getExpressionFromBracketsWillGiveSpecifiedExpression(){
+        String arg = "3 + ( 50 + 3 )";
+        EvaluatorOperations op = new EvaluatorOperations();
+        String result =  op.getExpressionFromBrackets(arg,5,arg.length()-2);
     }
 
     @Test
@@ -223,4 +221,21 @@ public class EvaluatorOperationsTest {
         assertEquals(expected,result,0.0);
     }
 
+    @Test
+    public void evaluateExpressionWillWorkForExpressionHavingNestedBracketsAndNegativeIntegers() throws Exception {
+        String arg = "-10 + ( ( 20 + -10 ) )";
+        float expected = 0.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result,0.0);
+    }
+
+    @Test
+    public void evaluateExpressionWillWorkForExpressionHavingNestedBracketsAndNegativeDecimals() throws Exception {
+        String arg = "-10.0 + ( ( 20.0 + -5.0 ) )";
+        float expected = 5.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result,0.0);
+    }
 }
