@@ -75,11 +75,9 @@ public class EvaluatorOperations {
         fileData = fileData.replaceAll("[ ]+", "");
         return fileData;
     }
-    public String getExpressionFromBrackets(String arg){
+    public String getExpressionFromBrackets(String arg,int startIndex,int endIndex){
         String expression  = arg;
-        int startIndex = expression.indexOf("(");
-        int endIndex = expression.indexOf(")");
-        String expressionInBracket = expression.substring(startIndex+1,endIndex);
+        String expressionInBracket = expression.substring(startIndex,endIndex);
         return expressionInBracket;
     }
     public String[] swapArrayElementsByOne(String[]arg){
@@ -115,12 +113,24 @@ public class EvaluatorOperations {
 
     public float evaluateExpression(String wholeExpression) {
         float finalResult = 0.0f;
-        if(wholeExpression.contains("(") && wholeExpression.contains(")")){
-            String expressionFromBrackets = getExpressionFromBrackets(wholeExpression);
+        int indexOfOpeningBracket=-1,indexOfClosingBracket=-1;
+        wholeExpression = wholeExpression.trim();
+        String[] elementList = wholeExpression.split("");
+        if(true == wholeExpression.contains("(")){
+            for (int i = 0; i < wholeExpression.length(); i++) {
+                if(wholeExpression.charAt(i)=='('){
+                    indexOfOpeningBracket = i;
+                }
+                if(wholeExpression.charAt(i)==')'){
+                    indexOfClosingBracket = i;
+                    break;
+                }
+            }
+            String expressionFromBrackets = getExpressionFromBrackets(wholeExpression,indexOfOpeningBracket+2,indexOfClosingBracket-1);
             float result = evaluate(expressionFromBrackets.trim());
-            String modifiedExpression = wholeExpression.replace("("+expressionFromBrackets+")",String.valueOf(result));
-            finalResult = evaluateExpression(modifiedExpression);
-            return finalResult;
+
+            String modifiedExpression = wholeExpression.replace("( "+expressionFromBrackets+" )",String.valueOf(result));
+            return evaluateExpression(modifiedExpression);
         }
         else{
             finalResult = evaluate(wholeExpression);
