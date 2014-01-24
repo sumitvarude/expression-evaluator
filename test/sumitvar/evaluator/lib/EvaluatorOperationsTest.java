@@ -63,6 +63,36 @@ public class EvaluatorOperationsTest {
     }
 
     @Test
+    public void executeEvaluatorWillGivesSubtractionOfMultipleNumbers() throws Exception {
+        String arg = "10 - 3 - 5";
+        float expected = 2.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result , 0.0);
+    }
+
+    @Test
+    public void executeEvaluatorWillGivesMultiplicationOfMultipleNumbers() throws Exception {
+        String arg = "10 * 3 * 2";
+        float expected = 60.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result , 0.0);
+    }
+
+    @Test
+    public void executeEvaluatorWillGivesDivisionAndPowerOfMultipleNumbers() throws Exception {
+        String arg = "10 / 2 ^ 2";
+        float expected = 25.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result , 0.0);
+    }
+
+    @Test
     public void subtractOperandsWillSubtractTwoNumbers() throws Exception {
         float one = 2.0f, two = 1.0f;
         float expected = 1.0f;
@@ -167,7 +197,7 @@ public class EvaluatorOperationsTest {
         assertEquals(expected,result,0.0);
     }
     @Test
-    public void evaluateExpressionWillWorkForExpressionHavingTwoPairOfBracketsAndIntegers() throws Exception {
+    public void evaluateExpressionWillWorkForExpressionHavingMultipleBracketsAndIntegers() throws Exception {
         String arg = " 3 + ( 50 / 2 ) + ( 2 - 1 )";
         float expected = 29.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
@@ -176,7 +206,7 @@ public class EvaluatorOperationsTest {
     }
 
     @Test
-    public void evaluateExpressionWillWorkForExpressionHavingTwoPairOfBracketsAndDecimal() throws Exception {
+    public void evaluateExpressionWillWorkForExpressionHavingMultipleBracketsAndDecimal() throws Exception {
         String arg = " 3.0 + ( 50.0 / 2.0 ) + ( 2.0 - 1.0 )";
         float expected = 29.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
@@ -185,11 +215,12 @@ public class EvaluatorOperationsTest {
     }
 
     @Test
-    public void evaluateExpressionWillWorkForExpressionHavingTwoPairOfBracketsAndNegativeIntegers() throws Exception {
+    public void evaluateExpressionWillWorkForExpressionHavingMultipleBracketsAndNegativeIntegers() throws Exception {
         String arg = "-10 + ( 20 + -10 )";
         float expected = 0.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
         float result = op.evaluateExpression(arg);
         assertEquals(expected,result,0.0);
     }
+
 }
