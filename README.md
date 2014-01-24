@@ -11,6 +11,13 @@
 1) Give `sh evaluator.sh [Expression]`    
 2) Example `sh evaluator.sh 2 + 3`
 
+##Release notes for Version 0.7
+1) Nested round bracket are allowed.
+2) Space will not be allowed between sign & value of negative operand.
+3) Expression must have space between operator & operands.
+
+Ex. `( 2 + ( 3  +  3 ) - 3 )` = 5
+
 ##Release notes for Version 0.6
 1) Multiple round bracket are allowed.
 2) Space will not be allowed between sign & value of negative operand.
