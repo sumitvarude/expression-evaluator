@@ -115,7 +115,7 @@ public class EvaluatorOperations {
 
     public float evaluateExpression(String wholeExpression) {
         float finalResult = 0.0f;
-        if(wholeExpression.contains("(")){
+        if(wholeExpression.contains("(") && wholeExpression.contains(")")){
             String expressionFromBrackets = getExpressionFromBrackets(wholeExpression);
             float result = evaluate(expressionFromBrackets.trim());
             String modifiedExpression = wholeExpression.replace("("+expressionFromBrackets+")",String.valueOf(result));
