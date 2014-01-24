@@ -48,7 +48,7 @@ public class EvaluatorOperationsTest {
         float expected = 5.0f;
         EvaluatorOperations op = new EvaluatorOperations();
 
-        float result = op.salveExpressionHavingBrackets(arg);
+        float result = op.evaluateExpression(arg);
         assertEquals(expected,result , 0.0);
     }
 
@@ -58,7 +58,7 @@ public class EvaluatorOperationsTest {
         float expected = 10.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
 
-        float result = op.salveExpressionHavingBrackets(arg);
+        float result = op.evaluateExpression(arg);
         assertEquals(expected,result , 0.0);
     }
 
@@ -108,7 +108,7 @@ public class EvaluatorOperationsTest {
         float expected = 25.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
 
-        float result = op.executeEvaluator(arg);
+        float result = op.evaluate(arg);
         assertEquals(expected,result , 0.0);
     }
 
@@ -151,19 +151,45 @@ public class EvaluatorOperationsTest {
     }
 
     @Test
-    public void salveExpressionHavingBracketsWillGiveAddition() throws Exception {
+    public void evaluateExpressionHavingBracketsWillGiveAddition() throws Exception {
         String arg = "3 + ( 50 + 3 )";
         float expected = 56.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
-        float result = op.salveExpressionHavingBrackets(arg);
+        float result = op.evaluateExpression(arg);
         assertEquals(expected,result,0.0);
     }
     @Test
-    public void salveExpressionHavingBrackets() throws Exception {
+    public void evaluateExpressionHavingSinglePairOfBracket() throws Exception {
         String arg = " 3 + ( 50 / 2 ) ";
         float expected = 28.0f;
         EvaluatorOperations  op = new EvaluatorOperations();
-        float result = op.salveExpressionHavingBrackets(arg);
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result,0.0);
+    }
+    @Test
+    public void evaluateExpressionWillWorkForExpressionHavingTwoPairOfBracketsAndIntegers() throws Exception {
+        String arg = " 3 + ( 50 / 2 ) + ( 2 - 1 )";
+        float expected = 29.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result,0.0);
+    }
+
+    @Test
+    public void evaluateExpressionWillWorkForExpressionHavingTwoPairOfBracketsAndDecimal() throws Exception {
+        String arg = " 3.0 + ( 50.0 / 2.0 ) + ( 2.0 - 1.0 )";
+        float expected = 29.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+        float result = op.evaluateExpression(arg);
+        assertEquals(expected,result,0.0);
+    }
+
+    @Test
+    public void evaluateExpressionWillWorkForExpressionHavingTwoPairOfBracketsAndNegativeIntegers() throws Exception {
+        String arg = "-10 + ( 20 + -10 )";
+        float expected = 0.0f;
+        EvaluatorOperations  op = new EvaluatorOperations();
+        float result = op.evaluateExpression(arg);
         assertEquals(expected,result,0.0);
     }
 }

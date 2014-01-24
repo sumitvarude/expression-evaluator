@@ -89,7 +89,7 @@ public class EvaluatorOperations {
         }
         return temp;
     }
-    public float executeEvaluator(String arg) {
+    public float evaluate(String arg) {
         arg = arg.trim();
         String[] elementList = arg.split(" ");
         List<Float> operands = getOperands(elementList);
@@ -113,17 +113,17 @@ public class EvaluatorOperations {
         return temp;
     }
 
-    public float salveExpressionHavingBrackets(String wholeExpression) {
+    public float evaluateExpression(String wholeExpression) {
         float finalResult = 0.0f;
         if(wholeExpression.contains("(")){
             String expressionFromBrackets = getExpressionFromBrackets(wholeExpression);
-            float result = executeEvaluator(expressionFromBrackets.trim());
+            float result = evaluate(expressionFromBrackets.trim());
             String modifiedExpression = wholeExpression.replace("("+expressionFromBrackets+")",String.valueOf(result));
-            finalResult = salveExpressionHavingBrackets(modifiedExpression);
+            finalResult = evaluateExpression(modifiedExpression);
             return finalResult;
         }
         else{
-            finalResult = executeEvaluator(wholeExpression);
+            finalResult = evaluate(wholeExpression);
         }
         return finalResult;
     }
