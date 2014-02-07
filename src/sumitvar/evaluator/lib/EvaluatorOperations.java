@@ -1,15 +1,26 @@
 package sumitvar.evaluator.lib;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class EvaluatorOperations {
 
-    public List<Float> getOperands(String[] arg) {
-        List<Float> operands = new ArrayList();
+    HashMap<String,BinaryOperation> operatorsMap = new HashMap<String, BinaryOperation>();
+
+    public EvaluatorOperations() {
+        operatorsMap.put("+",new AdditionOperation());
+        operatorsMap.put("-",new SubtractionOperation());
+        operatorsMap.put("*",new MultiplicationOperation());
+        operatorsMap.put("/",new DivisionOperation());
+        operatorsMap.put("^",new PowerOperation());
+    }
+
+    public List<Double> getOperands(String[] arg) {
+        List<Double> operands = new ArrayList();
         for (int i = 0; i < arg.length; i++) {
             try {
-                operands.add(Float.parseFloat(arg[i]));
+                operands.add(Double.parseDouble(arg[i]));
             } catch (Exception e) {
             }
         }
@@ -21,7 +32,7 @@ public class EvaluatorOperations {
         List<String> operators = new ArrayList();
         for (int i = 0; i < arg.length; i++) {
             try {
-                float temp = Float.parseFloat(arg[i]);
+                double temp = Double.parseDouble(arg[i]);
             } catch (Exception e) {
                 operators.add(arg[i]);
             }
@@ -29,29 +40,6 @@ public class EvaluatorOperations {
         return operators;
     }
 
-    public float addOperands(float a, float b) {
-        return a + b;
-    }
-
-    public float subtractOperands(float a, float b) {
-        return a - b;
-    }
-
-    public float multiplyOperands(float a, float b) {
-        return a * b;
-    }
-
-    public float divideOperands(float a, float b) {
-        return a / b;
-    }
-
-    public float getPower(float operand, float power) {
-        float result = 1.0f;
-        for (int i = 0; i < (int) power; i++) {
-            result = result * operand;
-        }
-        return result;
-    }
 
 
     public String joinExpression(String[] arg) {
@@ -82,33 +70,24 @@ public class EvaluatorOperations {
         return temp;
     }
 
-    public float evaluate(String arg) {
+    public double evaluate(String arg) {
         arg = arg.trim();
         String[] elementList = arg.split(" ");
-        List<Float> operands = getOperands(elementList);
+        List<Double> operands = getOperands(elementList);
         List<String> operator = getOperators(elementList);
-        float temp = operands.get(0);
+        double temp = operands.get(0);
         int j = 0;
         for (int i = 0; i < operands.size() - 1; i++) {
             String s = operator.get(j);
-            if (s.equals("+"))
-                temp = addOperands(temp, operands.get(i + 1));
-            if (s.equals("-"))
-                temp = subtractOperands(temp, operands.get(i + 1));
-            if (s.equals("*"))
-                temp = multiplyOperands(temp, operands.get(i + 1));
-            if (s.equals("/"))
-                temp = divideOperands(temp, operands.get(i + 1));
-            if (s.equals("^"))
-                temp = getPower(temp, operands.get(i + 1));
+            temp = operatorsMap.get(s).operate(temp,operands.get(i+1));
             j++;
         }
         return temp;
     }
 
-    public float evaluateExpression(String wholeExpression) {
+    public double evaluateExpression(String wholeExpression) {
         wholeExpression = handleSpaces(wholeExpression);
-        float finalResult = 0.0f;
+        double finalResult = 0.0;
         int indexOfOpeningBracket = -1, indexOfClosingBracket = -1;
         wholeExpression = wholeExpression.trim();
         String[] elementList = wholeExpression.split("");
@@ -123,7 +102,7 @@ public class EvaluatorOperations {
                 }
             }
             String expressionFromBrackets = getExpressionFromBrackets(wholeExpression, indexOfOpeningBracket + 2, indexOfClosingBracket - 1);
-            float result = evaluate(expressionFromBrackets.trim());
+            double result = evaluate(expressionFromBrackets.trim());
 
             String modifiedExpression = wholeExpression.replace("( " + expressionFromBrackets + " )", String.valueOf(result));
             return evaluateExpression(modifiedExpression);
@@ -152,4 +131,3 @@ public class EvaluatorOperations {
         return arg;
     }
 }
-
