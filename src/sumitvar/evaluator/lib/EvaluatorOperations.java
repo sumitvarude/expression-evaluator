@@ -6,9 +6,12 @@ import java.util.List;
 
 public class EvaluatorOperations {
 
+    String wholeExpression;
+
     HashMap<String,BinaryOperation> operatorsMap = new HashMap<String, BinaryOperation>();
 
-    public EvaluatorOperations() {
+    public EvaluatorOperations(String wholeExpression) {
+        this.wholeExpression = wholeExpression;
         operatorsMap.put("+",new AdditionOperation());
         operatorsMap.put("-",new SubtractionOperation());
         operatorsMap.put("*",new MultiplicationOperation());
@@ -44,22 +47,14 @@ public class EvaluatorOperations {
         return operators;
     }
 
-    public String joinExpression(String[] arg) {
-        StringBuilder joinedExpression = new StringBuilder();
-        for (int i = 0; i < arg.length; i++) {
-            joinedExpression.append(arg[i]);
-        }
-        return joinedExpression.toString();
-    }
-
-    public String getExpressionFromBrackets(String arg, int startIndex, int endIndex) {
-        String expression = arg;
+    public String getExpressionFromBrackets(int startIndex, int endIndex) {
+        String expression = this.wholeExpression;
         String expressionInBracket = expression.substring(startIndex, endIndex);
         return expressionInBracket;
     }
 
-    public double evaluate(String arg) {
-        arg = arg.trim();
+    public double evaluate() {
+        String arg = this.wholeExpression;
         String[] elementList = arg.split(" ");
         List<Double> operands = getOperands(elementList);
         List<String> operator = getOperators(elementList);
@@ -73,11 +68,10 @@ public class EvaluatorOperations {
         return temp;
     }
 
-    public double evaluateExpression(String wholeExpression) {
-        wholeExpression = handleSpaces(wholeExpression);
+    public double evaluateExpression() {
+        wholeExpression = handleSpaces();
         double finalResult = 0.0;
         int indexOfOpeningBracket = -1, indexOfClosingBracket = -1;
-        wholeExpression = wholeExpression.trim();
         if (true == wholeExpression.contains("(")) {
             for (int i = 0; i < wholeExpression.length(); i++) {
                 if (wholeExpression.charAt(i) == '(') {
@@ -88,34 +82,36 @@ public class EvaluatorOperations {
                     break;
                 }
             }
-            String expressionFromBrackets = getExpressionFromBrackets(wholeExpression, indexOfOpeningBracket + 2, indexOfClosingBracket - 1);
-            double result = evaluate(expressionFromBrackets.trim());
+            String expressionFromBrackets = getExpressionFromBrackets(indexOfOpeningBracket + 2, indexOfClosingBracket - 1);
+            double result = new EvaluatorOperations(expressionFromBrackets.trim()).evaluate();
 
             String modifiedExpression = wholeExpression.replace("( " + expressionFromBrackets + " )", String.valueOf(result));
-            return evaluateExpression(modifiedExpression);
+            return new EvaluatorOperations(modifiedExpression).evaluateExpression();
         }
         else {
-            finalResult = evaluate(wholeExpression);
+            finalResult = evaluate();
         }
         return finalResult;
     }
 
-    public String handleSpaces(String arg) {
-        arg = arg.trim();
-        arg = arg.replaceAll("\\+", " + ");
-        arg = arg.replaceAll("\\-", " - ");
-        arg = arg.replaceAll("\\*", " * ");
-        arg = arg.replaceAll("\\^", " ^ ");
-        arg = arg.replaceAll("\\(", " ( ");
-        arg = arg.replaceAll("\\)", " ) ");
-        arg = arg.replaceAll("/", " / ");
-        arg = arg.replaceAll("  - ", " -");
-        arg = arg.replaceAll(" -  "," -");
-        arg = arg.replaceAll("[ ]+"," ");
-        arg = arg.trim();
-        if (arg.charAt(0) == '-' && arg.charAt(1) == ' ')
-            arg = arg.replaceFirst("- ", "-");
+    public String handleSpaces() {
+        String expression = this.wholeExpression;
+        expression = expression.trim();
+        expression = expression.replaceAll("\\+", " + ");
+        expression = expression.replaceAll("\\-", " - ");
+        expression = expression.replaceAll("\\*", " * ");
+        expression = expression.replaceAll("\\^", " ^ ");
+        expression = expression.replaceAll("\\(", " ( ");
+        expression = expression.replaceAll("\\)", " ) ");
+        expression = expression.replaceAll("/", " / ");
+        expression = expression.replaceAll("  - ", " -");
+        expression = expression.replaceAll(" -  "," -");
+        expression = expression.replaceAll("[ ]+"," ");
+        expression = expression.trim();
+        if (expression.charAt(0) == '-' && expression.charAt(1) == ' ')
+            expression = expression.replaceFirst("- ", "-");
 
-        return arg;
+        this.wholeExpression = expression;
+        return expression;
     }
 }
