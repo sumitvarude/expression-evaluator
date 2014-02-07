@@ -1,5 +1,4 @@
 package sumitvar.evaluator.lib;
-
 /**
  *Parses the expression in the form which is understandable to evaluator
  */
@@ -10,7 +9,7 @@ public class Parser {
         this.wholeExpression = wholeExpression;
     }
 
-    public String handleSpaces() {
+    public String getEvaluableExpresssion() {
         String expression = this.wholeExpression;
         expression = expression.trim();
         expression = expression.replaceAll("\\+", " + ");

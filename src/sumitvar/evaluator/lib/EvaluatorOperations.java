@@ -67,8 +67,6 @@ public class EvaluatorOperations {
         return temp;
     }
     public double evaluateExpression() {
-        Parser parser = new Parser(this.wholeExpression);
-        wholeExpression = parser.handleSpaces();
         double finalResult = 0.0;
         int indexOfOpeningBracket = -1, indexOfClosingBracket = -1;
         if (true == wholeExpression.contains("(")) {
