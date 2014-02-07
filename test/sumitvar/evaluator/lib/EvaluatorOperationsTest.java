@@ -100,28 +100,8 @@ public class EvaluatorOperationsTest {
         EvaluatorOperations  op = new EvaluatorOperations();
 
         String result = op.joinExpression(arg);
-        assertEquals(expected,result);
-    }
-
-    @Test
-    public void reduceSpacesWillReduceSpacesFromExpression() throws Exception {
-        String arg = "10           -            (    5      +      3   )     ";
-        String expected = "10 - ( 5 + 3 ) ";
-        EvaluatorOperations  op = new EvaluatorOperations();
-
-        String result = op.reduceSpaces(arg);
-        assertEquals(expected,result);
-    }
-
-    @Test
-    public void swapArrayElementsByOneWillSwapEachElementToPreviousLocation() throws Exception {
-        String[] arg = {"", "(", "5", "+", "3", ")"};
-        String[] expected = {"(", "5", "+", "3", ")"};
-        EvaluatorOperations  op = new EvaluatorOperations();
-        String[] result = op.swapArrayElementsByOne(arg);
-        Assert.assertArrayEquals(expected,result);
-    }
-
+        assertEquals(expected, result);
+    } 
     @Test
     public void evaluateExpressionHavingBracketsWillGiveAddition() throws Exception {
         String arg = "3 + ( 50 + 3 )";

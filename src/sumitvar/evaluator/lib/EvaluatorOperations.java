@@ -16,31 +16,33 @@ public class EvaluatorOperations {
         operatorsMap.put("^",new PowerOperation());
     }
 
+    private boolean isNumber(String arg) {
+        try {
+            Double.parseDouble(arg);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
     public List<Double> getOperands(String[] arg) {
         List<Double> operands = new ArrayList();
         for (int i = 0; i < arg.length; i++) {
-            try {
+            if(isNumber(arg[i]))
                 operands.add(Double.parseDouble(arg[i]));
-            } catch (Exception e) {
-            }
         }
-
         return operands;
     }
 
     public List<String> getOperators(String[] arg) {
         List<String> operators = new ArrayList();
         for (int i = 0; i < arg.length; i++) {
-            try {
-                double temp = Double.parseDouble(arg[i]);
-            } catch (Exception e) {
+            if(!isNumber(arg[i]))
                 operators.add(arg[i]);
-            }
         }
         return operators;
     }
-
-
 
     public String joinExpression(String[] arg) {
         StringBuilder joinedExpression = new StringBuilder();
@@ -50,24 +52,10 @@ public class EvaluatorOperations {
         return joinedExpression.toString();
     }
 
-    public String reduceSpaces(String arg) {
-        String fileData = arg;
-        fileData = fileData.replaceAll("[ ]+", " ");
-        return fileData;
-    }
-
     public String getExpressionFromBrackets(String arg, int startIndex, int endIndex) {
         String expression = arg;
         String expressionInBracket = expression.substring(startIndex, endIndex);
         return expressionInBracket;
-    }
-
-    public String[] swapArrayElementsByOne(String[] arg) {
-        String temp[] = new String[arg.length - 1];
-        for (int i = 0; i < arg.length - 1; i++) {
-            temp[i] = arg[i + 1];
-        }
-        return temp;
     }
 
     public double evaluate(String arg) {
@@ -90,7 +78,6 @@ public class EvaluatorOperations {
         double finalResult = 0.0;
         int indexOfOpeningBracket = -1, indexOfClosingBracket = -1;
         wholeExpression = wholeExpression.trim();
-        String[] elementList = wholeExpression.split("");
         if (true == wholeExpression.contains("(")) {
             for (int i = 0; i < wholeExpression.length(); i++) {
                 if (wholeExpression.charAt(i) == '(') {
@@ -106,7 +93,8 @@ public class EvaluatorOperations {
 
             String modifiedExpression = wholeExpression.replace("( " + expressionFromBrackets + " )", String.valueOf(result));
             return evaluateExpression(modifiedExpression);
-        } else {
+        }
+        else {
             finalResult = evaluate(wholeExpression);
         }
         return finalResult;
@@ -123,7 +111,7 @@ public class EvaluatorOperations {
         arg = arg.replaceAll("/", " / ");
         arg = arg.replaceAll("  - ", " -");
         arg = arg.replaceAll(" -  "," -");
-        arg = reduceSpaces(arg);
+        arg = arg.replaceAll("[ ]+"," ");
         arg = arg.trim();
         if (arg.charAt(0) == '-' && arg.charAt(1) == ' ')
             arg = arg.replaceFirst("- ", "-");
