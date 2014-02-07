@@ -155,8 +155,8 @@ public class EvaluatorOperationsTest {
     public void handleSpacesCase1() throws Exception {
         String arg = "-10.0+((20.0+-5.0))";
         String expected = "-10.0 + ( ( 20.0 + -5.0 ) )";
-        EvaluatorOperations  op = new EvaluatorOperations(arg);
-        String result = op.handleSpaces();
+        Parser parser = new Parser(arg);
+        String result = parser.handleSpaces();
         assertEquals(expected,result);
     }
 
@@ -164,8 +164,8 @@ public class EvaluatorOperationsTest {
     public void handleSpacesCase2() throws Exception {
         String arg = "53 -(63+32)-(-534)";
         String expected = "53 - ( 63 + 32 ) - ( -534 )";
-        EvaluatorOperations  op = new EvaluatorOperations(arg);
-        String result = op.handleSpaces();
+        Parser parser = new Parser(arg);
+        String result = parser.handleSpaces();
         assertEquals(expected,result);
     }
 
@@ -173,8 +173,8 @@ public class EvaluatorOperationsTest {
     public void handleSpacesCase3() throws Exception {
         String arg = "-10.0+ (( 20.0 +-5.0))";
         String expected = "-10.0 + ( ( 20.0 + -5.0 ) )";
-        EvaluatorOperations  op = new EvaluatorOperations(arg);
-        String result = op.handleSpaces();
+        Parser parser = new Parser(arg);
+        String result = parser.handleSpaces();
         assertEquals(expected,result);
     }
 }

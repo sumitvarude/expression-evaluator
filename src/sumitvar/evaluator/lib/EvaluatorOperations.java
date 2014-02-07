@@ -6,9 +6,8 @@ import java.util.List;
 
 public class EvaluatorOperations {
 
-    String wholeExpression;
-
-    HashMap<String,BinaryOperation> operatorsMap = new HashMap<String, BinaryOperation>();
+    private String wholeExpression;
+    private HashMap<String,BinaryOperation> operatorsMap = new HashMap<String, BinaryOperation>();
 
     public EvaluatorOperations(String wholeExpression) {
         this.wholeExpression = wholeExpression;
@@ -67,9 +66,9 @@ public class EvaluatorOperations {
         }
         return temp;
     }
-
     public double evaluateExpression() {
-        wholeExpression = handleSpaces();
+        Parser parser = new Parser(this.wholeExpression);
+        wholeExpression = parser.handleSpaces();
         double finalResult = 0.0;
         int indexOfOpeningBracket = -1, indexOfClosingBracket = -1;
         if (true == wholeExpression.contains("(")) {
@@ -94,24 +93,5 @@ public class EvaluatorOperations {
         return finalResult;
     }
 
-    public String handleSpaces() {
-        String expression = this.wholeExpression;
-        expression = expression.trim();
-        expression = expression.replaceAll("\\+", " + ");
-        expression = expression.replaceAll("\\-", " - ");
-        expression = expression.replaceAll("\\*", " * ");
-        expression = expression.replaceAll("\\^", " ^ ");
-        expression = expression.replaceAll("\\(", " ( ");
-        expression = expression.replaceAll("\\)", " ) ");
-        expression = expression.replaceAll("/", " / ");
-        expression = expression.replaceAll("  - ", " -");
-        expression = expression.replaceAll(" -  "," -");
-        expression = expression.replaceAll("[ ]+"," ");
-        expression = expression.trim();
-        if (expression.charAt(0) == '-' && expression.charAt(1) == ' ')
-            expression = expression.replaceFirst("- ", "-");
 
-        this.wholeExpression = expression;
-        return expression;
-    }
 }
