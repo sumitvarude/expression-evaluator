@@ -10,7 +10,7 @@ public class ParserTest {
         String arg = "-10.0+((20.0+-5.0))";
         String expected = "-10.0 + ( ( 20.0 + -5.0 ) )";
         Parser parser = new Parser(arg);
-        String result = parser.getEvaluableExpresssion();
+        String result = parser.getEvaluableExpression();
         assertEquals(expected, result);
     }
 
@@ -19,7 +19,7 @@ public class ParserTest {
         String arg = "53 -(63+32)-(-534)";
         String expected = "53 - ( 63 + 32 ) - ( -534 )";
         Parser parser = new Parser(arg);
-        String result = parser.getEvaluableExpresssion();
+        String result = parser.getEvaluableExpression();
         assertEquals(expected, result);
     }
 
@@ -28,7 +28,8 @@ public class ParserTest {
         String arg = "-10.0+ (( 20.0 +-5.0))";
         String expected = "-10.0 + ( ( 20.0 + -5.0 ) )";
         Parser parser = new Parser(arg);
-        String result = parser.getEvaluableExpresssion();
+        String result = parser.getEvaluableExpression();
+
         assertEquals(expected, result);
     }
 }
