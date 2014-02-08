@@ -3,9 +3,9 @@ package sumitvar.evaluator.lib;
 /**
  * Created by sumitvar on 2/7/14.
  */
-public class PowerOperation implements BinaryOperation {
+public class PowerOperation extends BinaryOperation {
     @Override
-    public double operate(double number1, double number2) {
-        return Math.pow(number1,number2);
+    public double operate(Expression left, Expression right) {
+        return Math.pow(left.evaluate(), right.evaluate());
     }
 }

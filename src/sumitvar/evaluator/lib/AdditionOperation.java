@@ -1,11 +1,9 @@
 package sumitvar.evaluator.lib;
 
-/**
- * Created by sumitvar on 2/7/14.
- */
-public class AdditionOperation implements BinaryOperation {
+public class AdditionOperation extends BinaryOperation {
     @Override
-    public double operate(double number1, double number2) {
-        return number1 + number2;
+    public double operate(Expression left, Expression right) {
+        return left.evaluate() + right.evaluate();
+
     }
 }
