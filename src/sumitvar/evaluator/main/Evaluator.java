@@ -1,6 +1,5 @@
 package sumitvar.evaluator.main;
 
-
 import sumitvar.evaluator.lib.Expression;
 import sumitvar.evaluator.lib.Parser;
 
