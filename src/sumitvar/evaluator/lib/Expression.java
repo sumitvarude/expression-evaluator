@@ -1,10 +1,8 @@
 package sumitvar.evaluator.lib;
 
-import com.sun.java_cup.internal.runtime.virtual_parse_stack;
-
 public class Expression {
     private double value = 0;
-    private Expression left,right;
+    private Expression left, right;
     BinaryOperation operation;
 
     public Expression(double value) {
@@ -17,12 +15,8 @@ public class Expression {
         this.operation = operation;
     }
 
-    public double evaluate(){
-        return (value != 0) ? value : operation.operate(left , right);
-    }
-
-    public double getValue() {
-        return (value!=0)?value:evaluate();
+    public double evaluate() {
+        return (value != 0) ? value : operation.operate(left, right);
     }
 
     @Override

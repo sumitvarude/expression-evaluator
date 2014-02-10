@@ -2,14 +2,17 @@ package sumitvar.evaluator.lib;
 
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 public class OperatorTest {
     @Test
     public void addOperandsWillAddTwoNumbers() throws Exception {
-        double one = 1.0, two = 2.0, expected = 3.0;
+        double one = 1.0, two = 2.0,expected=3.0;
         double result = new AdditionOperation().operate(new Expression(one),new Expression(two));
-        assertEquals(result, expected, 0.0);
+        assertThat(result,is(expected));
+
     }
 
     @Test
