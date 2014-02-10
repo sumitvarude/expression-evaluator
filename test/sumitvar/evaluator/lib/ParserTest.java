@@ -164,5 +164,16 @@ public class ParserTest {
         assertEquals(expected,actual);
 
     }
+    @Test
+    public void testParsingExpressionWithSpacesAtLast() {
+        String expression = "(2*3/(1*2)) ";
+        Parser parser = new Parser(expression);
 
+        Expression expOne = new Expression(new Expression(1),new Expression(2),new MultiplicationOperation());
+        Expression expTwo = new Expression(new Expression(2),new Expression(3),new MultiplicationOperation());
+        Expression expected = new Expression(expTwo,expOne,new DivisionOperation());
+        Expression actual = parser.giveExpression();
+
+        assertEquals(expected,actual);
+    }
 }

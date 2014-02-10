@@ -21,51 +21,34 @@ public class Parser {
         operatorsMap.put("^",new PowerOperation());
     }
 
-    public void getEvaluableExpression() {
-        String expression = this.wholeExpression;
-        expression = expression.trim();
-        expression = expression.replaceAll("\\+", " + ");
-        expression = expression.replaceAll("\\-", " - ");
-        expression = expression.replaceAll("\\*", " * ");
-        expression = expression.replaceAll("\\^", " ^ ");
-        expression = expression.replaceAll("\\(", " ( ");
-        expression = expression.replaceAll("\\)", " ) ");
-        expression = expression.replaceAll("/", " / ");
-        expression = expression.replaceAll("  - ", " -");
-        expression = expression.replaceAll(" -  "," -");
-        expression = expression.replaceAll("[ ]+"," ");
-        expression = expression.trim();
-        if (expression.charAt(0) == '-' && expression.charAt(1) == ' ')
-            expression = expression.replaceFirst("- ", "-");
-        this.wholeExpression = expression;
-    }
-
     public List<String> getPostfix() {
         List<String> postfix = new ArrayList<String>();
+        Scanner scanner = new Scanner(wholeExpression);
         Stack<String> stack = new Stack<String>();
-        String[] expressionParts = this.wholeExpression.split(" ");
-        for (String expressionPart : expressionParts) {
-            if (isNumber(expressionPart)) {
-                postfix.add(expressionPart);
+        while(scanner.hasNext()){
+            String nextToken = scanner.next();
+            if(nextToken == null)
+                return postfix;
+            if (isNumber(nextToken)) {
+                postfix.add(nextToken);
                 if (stack.size() != 0 && !(stack.peek().equals("("))) {
                     postfix.add(stack.pop());
                 }
                 continue;
             }
-            if (expressionPart.equals(")")) {
+            if (nextToken.equals(")")) {
                 stack.pop();
                 if (stack.size() != 0 && !(stack.peek().equals("("))) {
                     postfix.add(stack.pop());
                 }
                 continue;
             }
-            stack.push(expressionPart);
+            stack.push(nextToken);
         }
         return postfix;
     }
 
     public Expression giveExpression() {
-        getEvaluableExpression();
         List<String> postfixExpression = getPostfix();
         Stack<Expression> expressionStack = new Stack<Expression>();
         BinaryOperation operation;
